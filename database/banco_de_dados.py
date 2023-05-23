@@ -1,4 +1,4 @@
-import app.conect as con
+import conect as con
 
 conexao = con.Connection()
 
