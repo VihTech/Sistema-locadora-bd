@@ -49,7 +49,7 @@ def tabela_genero():
         auto_size_columns=True,
         justification='center',
         enable_events=True,
-        num_rows=20,
+        num_rows=17,
         key='-TABLE-',
         tooltip='Atores',)],
         [sg.Button('Voltar')]
