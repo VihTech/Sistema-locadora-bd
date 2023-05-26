@@ -8,7 +8,7 @@ class Config:
 			'password': 'mpe',
 			'host': '127.0.0.1',
 			'port': '5432',
-			'database': 'locadora'
+			'database': 'locadora2'
 		}
 
 class Connection(Config):

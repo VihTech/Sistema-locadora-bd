@@ -4,6 +4,7 @@ from estoque import*
 from table_actor import*
 from genero import*
 from cliente import*
+from financeiro import*
 
 
 conexao = con.Connection()
@@ -41,6 +42,11 @@ while True:
     elif eventos == 'Genêros':
         janela.hide()
         tabela_genero()
+        janela.un_hide()
+
+    elif eventos == 'Financeiro':
+        janela.hide()
+        tabela_financeiro()
         janela.un_hide()
         
     elif eventos == sg.WIN_CLOSED:

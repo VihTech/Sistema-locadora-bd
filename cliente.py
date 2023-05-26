@@ -69,6 +69,8 @@ def tabela_cliente():
         max_col_width=50,
         auto_size_columns=True,
         justification='center',
+        expand_x=True,
+        expand_y=True,
         enable_events=True,
         background_color='#474747',
         alternating_row_color='#808080',
