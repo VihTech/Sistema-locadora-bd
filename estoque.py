@@ -19,7 +19,7 @@ def tabela_estoque():
         [sg.Text('Filmes alugados')],
         [sg.Table(values=lista_informacoes_estoque,
         headings=['Filmes', 'Quantidade'],
-        max_col_width=25,
+        max_col_width=50,
         auto_size_columns=True,
         justification='center',
         enable_events=True,
@@ -38,4 +38,3 @@ def tabela_estoque():
             break
         elif eventos == 'Voltar':
             janela_estoque.close()
-

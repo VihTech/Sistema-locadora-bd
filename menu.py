@@ -3,6 +3,7 @@ import conect as con
 from estoque import*
 from table_actor import*
 from genero import*
+from cliente import*
 
 conexao = con.Connection()
 
@@ -29,6 +30,11 @@ while True:
     elif eventos == 'Atores':
         janela.hide()
         tabela_atores()
+        janela.un_hide()
+
+    elif eventos == 'Clientes':
+        janela.hide()
+        tabela_cliente()
         janela.un_hide()
 
     elif eventos == 'Genêros':

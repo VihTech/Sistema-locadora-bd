@@ -5,7 +5,7 @@ class Config:
 	def __init__(self):
 		self.config = {
 			'user': 'postgres',
-			'password': 'vitoria',
+			'password': 'mpe',
 			'host': '127.0.0.1',
 			'port': '5432',
 			'database': 'locadora'

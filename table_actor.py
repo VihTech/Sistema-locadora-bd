@@ -1,16 +1,24 @@
 import PySimpleGUI as sg
 import conect as con
+from tabela_film_ator import*
 
 conexao = con.Connection()
-filmes_atores = conexao.query("SELECT CONCAT(first_name, ' ', last_name), COUNT(film_actor.film_id) FROM film_actor INNER JOIN actor ON film_actor.actor_id = actor.actor_id GROUP BY first_name, last_name ORDER BY count desc")
+filmes_atores = conexao.query("""SELECT  actor.actor_id, CONCAT(first_name, ' ', last_name), COUNT(film_actor.film_id)
+FROM
+
+film_actor INNER JOIN actor ON film_actor.actor_id = actor.actor_id
+
+GROUP BY
+first_name, last_name, actor.actor_id""")
 
 lista_informacoes_atores = []
-for concat, count in filmes_atores:
+lista_id = []
+for actor_id, concat, count in filmes_atores:
     lista = []
+    lista_id.append(actor_id)
     lista.append(concat)
     lista.append(count)
     lista_informacoes_atores.append(lista)
-
 
 def tabela_atores():
     sg.theme('DarkGrey1')
@@ -18,14 +26,14 @@ def tabela_atores():
     layout = [
         [sg.Text('Tabela Atores')],
         [sg.Table(values=lista_informacoes_atores,
-        headings=['Nome', 'Filmes'],
+        headings=['     Nome     ', '   Filmes   '],
         max_col_width=25,
         auto_size_columns=True,
         justification='center',
         enable_events=True,
         num_rows=20,
         key='-TABLE-',
-        tooltip='Atores',)],
+        tooltip='Ver filmes')],
         [sg.Button('Voltar')]
     ]
 
@@ -38,4 +46,10 @@ def tabela_atores():
             break
         elif eventos == 'Voltar':
             janela.close()
-        
+
+        elif eventos == '-TABLE-':
+            janela.hide()
+            pegar_filme(lista_id[valores['-TABLE-'][0]])
+            tabela_atores_filme()
+            janela.un_hide()
+ 
