@@ -5,6 +5,7 @@ from table_actor import*
 from genero import*
 from cliente import*
 
+
 conexao = con.Connection()
 
 sg.theme('DarkGrey1')
