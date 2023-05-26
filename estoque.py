@@ -16,17 +16,20 @@ def tabela_estoque():
     sg.theme('DarkGrey1')
 
     layout = [
-        [sg.Text('Filmes alugados')],
+        [sg.Text('Filmes alugados', font=(12, 12))],
         [sg.Table(values=lista_informacoes_estoque,
         headings=['Filmes', 'Quantidade'],
         max_col_width=50,
+        background_color='#474747',
+        alternating_row_color='#808080',
         auto_size_columns=True,
         justification='center',
+        font=(12, 12),
         enable_events=True,
         num_rows=20,
         key='-TABLE-',
         tooltip='Atores',)],
-        [sg.Button('Voltar')]
+        [sg.Button('Voltar', font=(12, 12))]
     ]
 
     janela_estoque = sg.Window('Menu locadora', layout, element_justification='c')

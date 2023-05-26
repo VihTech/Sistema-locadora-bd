@@ -63,17 +63,20 @@ def tabela_cliente():
     sg.theme('DarkGrey1')
 
     layout = [
-        [sg.Text('Clientes')],
+        [sg.Text('Clientes', font=(12, 12))],
         [sg.Table(values=lista_informacoes_cliente,
         headings=['Nome', 'Endereço', 'Email', 'Loja', 'DataCriamento', 'Atualização', 'Ativo', 'Filmes'],
         max_col_width=50,
         auto_size_columns=True,
         justification='center',
         enable_events=True,
+        background_color='#474747',
+        alternating_row_color='#808080',
+        font=(12, 12),
         num_rows=40,
         key='-TABLE-',
         tooltip='Atores',)],
-        [sg.Button('Voltar')]
+        [sg.Button('Voltar', font=(12, 12))]
     ]
 
     janela_estoque = sg.Window('Menu locadora', layout, element_justification='c')

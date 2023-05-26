@@ -10,15 +10,15 @@ conexao = con.Connection()
 sg.theme('DarkGrey1')
 
 layout = [
-    [sg.Text('Menu Locadora')],
-    [sg.Button('Estoque', size=(25,0))],
-    [sg.Button('Financeiro', size=(25,0))],
-    [sg.Button('Atores', size=(25,0))],
-    [sg.Button('Genêros', size=(25,0))],
-    [sg.Button('Clientes', size=(25,0))]
+    [sg.Text('Menu Locadora', font=(12, 12))],
+    [sg.Button('Estoque', size=(25,0), font=(12, 12))],
+    [sg.Button('Financeiro', size=(25,0), font=(12, 12))],
+    [sg.Button('Atores', size=(25,0), font=(12, 12))],
+    [sg.Button('Genêros', size=(25,0), font=(12, 12))],
+    [sg.Button('Clientes', size=(25,0), font=(12, 12))]
 ]
 
-janela = sg.Window('Menu locadora', layout, element_justification='c', size=(300, 200))
+janela = sg.Window('Menu locadora', layout, element_justification='c', size=(300, 220))
 
 while True:
     eventos, valores = janela.read()

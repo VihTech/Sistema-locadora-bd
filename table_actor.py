@@ -24,17 +24,20 @@ def tabela_atores():
     sg.theme('DarkGrey1')
 
     layout = [
-        [sg.Text('Tabela Atores')],
+        [sg.Text('Tabela Atores', font=(12, 12))],
         [sg.Table(values=lista_informacoes_atores,
         headings=['     Nome     ', '   Filmes   '],
         max_col_width=25,
         auto_size_columns=True,
         justification='center',
         enable_events=True,
+        background_color='#474747',
+        alternating_row_color='#808080',
         num_rows=20,
         key='-TABLE-',
+        font=(12, 12),
         tooltip='Ver filmes')],
-        [sg.Button('Voltar')]
+        [sg.Button('Voltar', font=(12, 12))]
     ]
 
     janela = sg.Window('Menu locadora', layout, element_justification='c')

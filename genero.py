@@ -42,17 +42,20 @@ def tabela_genero():
     sg.theme('DarkGrey1')
 
     layout = [
-        [sg.Text('Tabela Atores')],
+        [sg.Text('Tabela Atores', font=(12, 12))],
         [sg.Table(values=lista_informacoes_genero,
         headings=['Genero', 'Demanda', 'Valor Apurado'],
         max_col_width=25,
         auto_size_columns=True,
         justification='center',
+        background_color='#474747',
+        alternating_row_color='#808080',
         enable_events=True,
+        font=(12, 12),
         num_rows=17,
         key='-TABLE-',
         tooltip='Atores',)],
-        [sg.Button('Voltar')]
+        [sg.Button('Voltar', font=(12, 12))]
     ]
 
     janela = sg.Window('Menu locadora', layout, element_justification='c')
