@@ -2,39 +2,27 @@ import PySimpleGUI as sg
 import conect as con
 
 conexao = con.Connection()
-genero = conexao.query("""WITH t1 AS (
-  SELECT c.name AS Genre, COUNT(cu.customer_id) AS Total_rent_demand
-  FROM category c
-  JOIN film_category fc USING (category_id)
-  JOIN film f USING (film_id)
-  JOIN inventory i USING (film_id)
-  JOIN rental r USING (inventory_id)
-  JOIN customer cu USING (customer_id)
-  GROUP BY 1
-  ORDER BY 2 DESC
-),
-t2 AS (
-  SELECT c.name AS Genre, SUM(p.amount) AS total_sales
-  FROM category c
-  JOIN film_category fc USING (category_id)
-  JOIN film f USING (film_id)
-  JOIN inventory i USING (film_id)
-  JOIN rental r USING (inventory_id)
-  JOIN payment p USING (rental_id)
-  GROUP BY 1
-  ORDER BY 2 DESC
-)
-SELECT t1.genre, t1.total_rent_demand, t2.total_sales
-FROM t1
-JOIN t2 ON t1.genre = t2.genre;
+genero = conexao.query("""
+
+SELECT
+	name AS "Categoria",
+	COUNT(rent.inventory_id)
+FROM
+	film_category fctg
+	LEFT JOIN category ctg ON fctg.category_id = ctg.category_id
+	LEFT JOIN film flm ON fctg.film_id = flm.film_id
+	LEFT JOIN inventory inv ON fctg.film_id = inv.film_id
+	LEFT JOIN rental rent ON inv.inventory_id = rent.inventory_id
+GROUP BY
+	"Categoria"
+
 """)
 
 lista_informacoes_genero = []
-for genre, total_rent_demand, total_sales in genero:
+for Categoria, count in genero:
     lista = []
-    lista.append(genre)
-    lista.append(total_rent_demand)
-    lista.append(total_sales)
+    lista.append(Categoria)
+    lista.append(count)
     lista_informacoes_genero.append(lista)
 
 
@@ -44,7 +32,7 @@ def tabela_genero():
     layout = [
         [sg.Text('Tabela Atores', font=(12, 12))],
         [sg.Table(values=lista_informacoes_genero,
-        headings=['Genero', 'Demanda', 'Valor Apurado'],
+        headings=['    Genero    ', '  Demanda  '],
         max_col_width=25,
         auto_size_columns=True,
         justification='center',

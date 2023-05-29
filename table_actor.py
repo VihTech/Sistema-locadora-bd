@@ -3,21 +3,35 @@ import conect as con
 from tabela_film_ator import*
 
 conexao = con.Connection()
-filmes_atores = conexao.query("""SELECT  actor.actor_id, CONCAT(first_name, ' ', last_name), COUNT(film_actor.film_id)
+filmes_atores = conexao.query("""
+
+SELECT
+	actr.actor_id,
+	CONCAT(first_name, ' ', last_name) AS "Ator",
+	COUNT(title) AS "NFilmesAtuados",
+	COUNT(rent.inventory_id) AS "Vendas"
 FROM
-
-film_actor INNER JOIN actor ON film_actor.actor_id = actor.actor_id
-
+	actor actr
+	LEFT JOIN film_actor flmactr ON actr.actor_id = flmactr.actor_id
+	LEFT JOIN film flm ON flmactr.film_id = flm.film_id
+	LEFT JOIN inventory inv ON inv.film_id = flm.film_id
+	LEFT JOIN rental rent ON inv.inventory_id = rent.inventory_id
 GROUP BY
-first_name, last_name, actor.actor_id""")
+	"Ator",
+	actr.actor_id
+ORDER BY
+	"Vendas" DESC
+
+""")
 
 lista_informacoes_atores = []
 lista_id = []
-for actor_id, concat, count in filmes_atores:
+for actor_id, Ator, NFilmesAtuados, Vendas in filmes_atores:
     lista = []
     lista_id.append(actor_id)
-    lista.append(concat)
-    lista.append(count)
+    lista.append(Ator)
+    lista.append(NFilmesAtuados)
+    lista.append(Vendas)
     lista_informacoes_atores.append(lista)
 
 def tabela_atores():
@@ -26,7 +40,7 @@ def tabela_atores():
     layout = [
         [sg.Text('Tabela Atores', font=(12, 12))],
         [sg.Table(values=lista_informacoes_atores,
-        headings=['     Nome     ', '   Filmes   '],
+        headings=['     Nome     ', 'Filmes Atuados', 'Filmes Alugados'],
         max_col_width=25,
         auto_size_columns=True,
         justification='center',
